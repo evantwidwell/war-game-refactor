@@ -15,8 +15,8 @@ logging.basicConfig(
 logger = logging.getLogger()
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--auto', action='store_true', help='prevent request for user action to move game along.')
-parser.add_argument('--output', nargs='?', const='gameplay.log', default=False, help='file to output logs to, game will auto play.')
+parser.add_argument('--auto', action='store_true', help='Prevent request for user action, move game along automatically')
+parser.add_argument('--output', nargs='?', const='gameplay.log', default=False, help='Auto play game and output the game results to a log file')
 args = parser.parse_args()
 
 def play_round(player_1_hand, player_2_hand, player_1_played_cards, player_2_played_cards, player_1_discard, player_2_discard, deal=1):
