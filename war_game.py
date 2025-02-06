@@ -90,10 +90,8 @@ def play_war():
         round += 1
 
 if __name__ == '__main__':
-    print('handlers:', logger.handlers)
     if args.output:
         logger.addHandler(logging.FileHandler(mode='w', filename=(args.output.replace('.log', '')+'.log')))
     else:
         logger.addHandler(logging.StreamHandler())
-    print(args)
     play_war()
