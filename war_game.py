@@ -1,3 +1,5 @@
+import logging
+import argparse
 from helper_functions import (
     check_and_refill_hand,
     compare_cards,
@@ -5,16 +7,23 @@ from helper_functions import (
     split_deck,
 )
 
-import logging
-
-logging.basicConfig(filename="gameplay.log", filemode='w')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(message)s',
+    handlers=[],
+)
 logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--auto', action='store_true', help='prevent request for user action to move game along.')
+parser.add_argument('--output', nargs='?', const='gameplay.log', default=False, help='file to output logs to, game will auto play.')
+args = parser.parse_args()
 
 def play_round(player_1_hand, player_2_hand, player_1_played_cards, player_2_played_cards, player_1_discard, player_2_discard, deal=1):
     '''
     Single round of gameplay, wars are considered part of the same round, and are recursively called
     '''
+    if (not args.auto) and not(args.output): input('Press Enter to play')
     for _ in range(0, deal):
         if not any([any(player_1_hand), any(player_1_discard), any(player_2_hand), any(player_2_discard)]):
             # Players have played all cards in one long series of wars, just compare on the last card or draw
@@ -81,4 +90,10 @@ def play_war():
         round += 1
 
 if __name__ == '__main__':
+    print('handlers:', logger.handlers)
+    if args.output:
+        logger.addHandler(logging.FileHandler(mode='w', filename=(args.output.replace('.log', '')+'.log')))
+    else:
+        logger.addHandler(logging.StreamHandler())
+    print(args)
     play_war()
