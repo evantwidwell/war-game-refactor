@@ -1,4 +1,4 @@
-# Title
+# Python Engineer Homework
 
 ## Premise
 Implemented at the start of this assignement is the deterministic card game "war". [(See Game Rules here)](https://cardgames.io/war/)
@@ -62,33 +62,60 @@ Refactor the code into something more readable, robust, and professional, whatev
 
 The base game is very simple. We want to give the players the option to mix it up a bit. Create a new argument flag to implement the following house rules.
 
-- Rule 1 | Suit Up
-    - If the same suit is played, they have a 'two card' war, but they play from the bottom
-    - This rule is immediately interrupted by the classic 'War', or by 'Color Theory' (rule 2, if applied to the game). If a Rule 3 is in effect, and a king and queen are played, rule 3 takes over but continues to play from the bottom of the hand.
-    - If the same suit is played while already playing from the bottom of the deck, continue to play from the bottom of the deck.
-- Rule 2 | Color Theory
-    - If the same color is played, players must repeat single card 'war' until they both play that same color combination again
-    - If rule 1 is in play, and the same suit is played to end the rule 2 condition, the battle continues based off of rule 1, rather than ending
-    - If rule 3 is in play, and at any point a king and a queen are played, rule 2 ends and rule 3 takes over
-- Rule 3 | Battle "with advantage"
-    - Occurs when a King and Queen are played at the same time
-        - The Queen plays one Card
-        - The King plays one card
-            - if it's lower than the Queen player's new card, they play a second card.
-                - If it's still lower, the Queen player wins all 5 cards.
-                - If it's higher, the King wins all 5 cards
-            - If it's higher, the King wins all 4 cards
-    - If rule 2 is in effect and the king and queen are the same color, rule 2 is nullified
-    - If rule 1 is in effect, and the king and queen are the same suit, rule 1 is nullified, but the rest of the "Battle with advantage" (rule 3) is played from the bottom of the hand
+_Only zero or one house rule should be implemented per game_
 
-_'No', 'Some', or 'All' rules should be applicable to any game based on what the user provides the flag_
+### Rule 1 | Suit Up
+- If the same suit is played, they have a 'two card' war, but cards are played from the bottom of the hand
+- This rule is immediately interrupted by the classic 'War'
+### Rule 2 | Color Theory
+- If the same color is played, players must repeat single card 'war' until they both play that same color combination again
+- Classic 'Wars' do not take effect if the same card of opposite colors is played
+### Rule 3 | Battle "with advantage"
+- Occurs when a King and Queen are played at the same time
+    - The Queen plays one card
+    - The King plays one card
+        - If it's higher, the King wins all 4 cards
+        - If it's lower than the Queen player's new card, they play a second card.
+            - If it's still lower, the Queen player wins all 5 cards.
+            - If it's higher, the King wins all 5 cards
+- Classic 'Wars' do not take effect until the Battle 'with advantage' is complete
 
 ## Installation
-Clone the git-repo
-```
-TODO clone command
-```
-utilize python 3.9 or greater
+Clone the git-repo, and utilize python 3.9 or greater. The game is run in the terminal, and no non-standard python packages are used. (you can use any standard or non-standard packages you like, as long as you have proper installation instructions)
 
-## Submition
-TODO
+## Bonus: Still have time?
+
+If you finish the above and still have time within the given 4 hours, here is a bonus challenge to show off a bit.
+
+**Implement Multiple house rules per game:** The rules are re-defined below to explain the interplay of the rules
+
+### Rule 1 | Suit Up
+- If the same suit is played, they have a 'two card' war, but cards are played from the bottom of the hand
+- This rule is immediately interrupted by the classic 'War', or by 'Color Theory' (rule 2, if applied to the game).
+- If Rule 3 is in effect, and a king and queen are played, rule 3 takes over but continues to play from the bottom of the hand.
+- If the same suit is played while already playing from the bottom of the deck, continue to play from the bottom of the deck.
+
+### Rule 2 | Color Theory
+- If the same color is played, players must repeat single card 'war' until they both play that same color combination again
+- Classic 'Wars' do not take effect if the same card of opposite colors is played
+- If rule 1 is in play, and the same suit is played to end the rule 2 condition, the battle continues based off of rule 1, rather than ending
+- If rule 3 is in play, and at any point a king and a queen are played, rule 2 ends and rule 3 takes over
+
+### Rule 3 | Battle "with advantage"
+- Occurs when a King and Queen are played at the same time
+    - The Queen plays one Card
+    - The King plays one card
+        - if it's lower than the Queen player's new card, they play a second card.
+            - If it's still lower, the Queen player wins all 5 cards.
+            - If it's higher, the King wins all 5 cards
+        - If it's higher, the King wins all 4 cards
+- Classic 'Wars' do not take effect until the Battle 'with advantage' is complete
+- If rule 2 is in effect and the king and queen are the same color, rule 2 is nullified
+- If rule 1 is in effect, and the king and queen are the same suit, rule 1 is nullified, but the rest of the "Battle with advantage" (rule 3) is played from the bottom of the hand
+
+## Deliverables
+
+We would like you to create your own repo that has the finished homework assignment. Please include documentation on anything we need to know to set it up and any notes you have for the team.
+
+## Questions?
+We are happy to answer questions. Just reach out to your recruiter to get in touch.
