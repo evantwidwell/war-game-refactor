@@ -3,15 +3,23 @@
 ## Premise
 Implemented at the start of this assignement is the deterministic card game "war". [(See Game Rules here)](https://cardgames.io/war/)
 
+There's also a pre-implemented house rule:
+### House Rule 1 | Suit Up
+- If the same suit is played, they have a 'two card' war, but cards are played from the bottom of the hand
+- If the second card from each player is the same suit again, ignore the values and play 'suit up' again, continuing from the bottom of the deck
+- Regular wars always take precedence over suit up, if the two cards are the same suit or not, if the values match, enter a regular war
+    - Wars ending in the same suit do not trigger suit-up
+
 This assignment will be judged by your ability to complete two goals:
 1. Refactor the game into a more readable and robust format, utilizing more sophisticated coding practices.
-2. Implement optional 'house rules' into the game.
+2. Implement additional 'house rules' into the game.
 
 ### Starting Implementation
 When the game is run there are a few optional flags
 ```
   --auto             Prevent request for user action, move game along automatically
   --output [OUTPUT]  Auto play game and output the game results to a log file
+  --suit-up          run game with "suit up" house rule
 ```
 Example output
 ```
@@ -60,17 +68,14 @@ Refactor the code into something more readable, robust, and professional, whatev
 
 ## Part 2 - Implement House Rules
 
-The base game is very simple. We want to give the players the option to mix it up a bit. Create a new argument flag to implement the following house rules.
+In your re-factored implementation of the base game with the 'suit up' house rule, implement these other two house rules
 
 _Only zero or one house rule should be implemented per game_
 
-### Rule 1 | Suit Up
-- If the same suit is played, they have a 'two card' war, but cards are played from the bottom of the hand
-- This rule is immediately interrupted by the classic 'War'
-### Rule 2 | Color Theory
+### House Rule 2 | Color Theory
 - If the same color is played, players must repeat single card 'war' until they both play that same color combination again
 - Classic 'Wars' do not take effect if the same card of opposite colors is played
-### Rule 3 | Battle "with advantage"
+### House Rule 3 | Battle "with advantage"
 - Occurs when a King and Queen are played at the same time
     - The Queen plays one card
     - The King plays one card
@@ -89,19 +94,22 @@ If you finish the above and still have time within the given 4 hours, here is a 
 
 **Implement Multiple house rules per game:** The rules are re-defined below to explain the interplay of the rules
 
-### Rule 1 | Suit Up
+### House Rule 1 | Suit Up
 - If the same suit is played, they have a 'two card' war, but cards are played from the bottom of the hand
-- This rule is immediately interrupted by the classic 'War', or by 'Color Theory' (rule 2, if applied to the game).
+    - If the second card from each player is the same suit again, ignore the values and play 'suit up' again, continuing from the bottom of the deck
+- Regular wars always take precedence over suit up, if the two cards are the same suit or not, if the values match, enter a regular war
+    - Wars ending in the same suit do not trigger suit-up
+- This rule is also immediately interrupted by 'Color Theory' (rule 2, if applied to the game).
 - If Rule 3 is in effect, and a king and queen are played, rule 3 takes over but continues to play from the bottom of the hand.
 - If the same suit is played while already playing from the bottom of the deck, continue to play from the bottom of the deck.
 
-### Rule 2 | Color Theory
+### House Rule 2 | Color Theory
 - If the same color is played, players must repeat single card 'war' until they both play that same color combination again
 - Classic 'Wars' do not take effect if the same card of opposite colors is played
 - If rule 1 is in play, and the same suit is played to end the rule 2 condition, the battle continues based off of rule 1, rather than ending
 - If rule 3 is in play, and at any point a king and a queen are played, rule 2 ends and rule 3 takes over
 
-### Rule 3 | Battle "with advantage"
+### House Rule 3 | Battle "with advantage"
 - Occurs when a King and Queen are played at the same time
     - The Queen plays one Card
     - The King plays one card
