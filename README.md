@@ -11,8 +11,8 @@ There's also a pre-implemented house rule:
     - Wars ending in the same suit do not trigger suit-up
 
 This assignment will be judged by your ability to complete two goals:
-1. Refactor the game into a more readable and robust format, utilizing more sophisticated coding practices.
-2. Implement additional 'house rules' into the game.
+1. Refactor the game into a more readable and robust format, utilizing more sophisticated coding practices, with automated tests to ensure consistent behavior.
+2. Implement an additional 'house rule' into the game.
 
 ### Starting Implementation
 When the game is run there are a few optional flags
@@ -66,16 +66,15 @@ While the initial implementation works, it's far from ideal.
 
 Refactor the code into something more readable, robust, and professional, whatever that means to you. We want to know how you think and code.
 
-## Part 2 - Implement House Rules
+Write tests for your code, to ensure that the behavior is consistent before and after the refactor.
 
-In your re-factored implementation of the base game with the 'suit up' house rule, implement these other two house rules
+## Part 2 - Implement Second House Rule
+
+In your re-factored implementation of the base game with the 'suit up' house rule, implement another house rule. Also be sure to have tests to check the new gameplay behavior.
 
 _Only zero or one house rule should be implemented per game_
 
-### House Rule 2 | Color Theory
-- If the same color is played, players must repeat single card 'war' until they both play that same color combination again
-- Classic 'Wars' do not take effect if the same card of opposite colors is played
-### House Rule 3 | Battle "with advantage"
+### House Rule 2 | Battle "with advantage"
 - Occurs when a King and Queen are played at the same time
     - The Queen plays one card
     - The King plays one card
@@ -99,17 +98,10 @@ If you finish the above and still have time within the given 4 hours, here is a 
     - If the second card from each player is the same suit again, ignore the values and play 'suit up' again, continuing from the bottom of the deck
 - Regular wars always take precedence over suit up, if the two cards are the same suit or not, if the values match, enter a regular war
     - Wars ending in the same suit do not trigger suit-up
-- This rule is also immediately interrupted by 'Color Theory' (rule 2, if applied to the game).
-- If Rule 3 is in effect, and a king and queen are played, rule 3 takes over but continues to play from the bottom of the hand.
+- If Rule 2 is in effect, and a king and queen are played, rule 2 takes over but continues to play from the bottom of the hand.
 - If the same suit is played while already playing from the bottom of the deck, continue to play from the bottom of the deck.
 
-### House Rule 2 | Color Theory
-- If the same color is played, players must repeat single card 'war' until they both play that same color combination again
-- Classic 'Wars' do not take effect if the same card of opposite colors is played
-- If rule 1 is in play, and the same suit is played to end the rule 2 condition, the battle continues based off of rule 1, rather than ending
-- If rule 3 is in play, and at any point a king and a queen are played, rule 2 ends and rule 3 takes over
-
-### House Rule 3 | Battle "with advantage"
+### House Rule 2 | Battle "with advantage"
 - Occurs when a King and Queen are played at the same time
     - The Queen plays one Card
     - The King plays one card
@@ -118,8 +110,7 @@ If you finish the above and still have time within the given 4 hours, here is a 
             - If it's higher, the King wins all 5 cards
         - If it's higher, the King wins all 4 cards
 - Classic 'Wars' do not take effect until the Battle 'with advantage' is complete
-- If rule 2 is in effect and the king and queen are the same color, rule 2 is nullified
-- If rule 1 is in effect, and the king and queen are the same suit, rule 1 is nullified, but the rest of the "Battle with advantage" (rule 3) is played from the bottom of the hand
+- If rule 1 is in effect, and the king and queen are the same suit, rule 1 is nullified, but the rest of the "Battle with advantage" (rule 2) is played from the bottom of the hand
 
 ## Deliverables
 
