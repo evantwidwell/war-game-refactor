@@ -26,17 +26,21 @@ def map_card_to_numeric(card):
     elif suitless == 'K': return 13
     else: return int(suitless) if int(suitless) != 1 else 14  # aces high
 
-def compare_cards(card_1, card_2):
-    '''return
+def compare_cards(card_1, card_2, suit_up_active=False):
+    '''
+    return
         0 if they're the same
         1 if card_1 is greater than card_2
         2 if card_1 is less than card_2
+        3 if cards are the same suit, and playing 'suit_up'
     '''
     numeric_1 = map_card_to_numeric(card_1)
     numeric_2 = map_card_to_numeric(card_2)
     if numeric_1 == numeric_2: return 0
+    elif suit_up_active and (card_1[-1] == card_2[-1]): return 3
     elif numeric_1 > numeric_2: return 1
     elif numeric_1 < numeric_2: return 2
+    raise Exception(f"Comparison detected something unforeseen: {card_1} vs. {card_2}")
 
 def check_and_refill_hand(hand, discard):
     '''

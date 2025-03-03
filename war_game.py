@@ -17,38 +17,44 @@ logger = logging.getLogger()
 parser = argparse.ArgumentParser()
 parser.add_argument('--auto', action='store_true', help='Prevent request for user action, move game along automatically')
 parser.add_argument('--output', nargs='?', const='gameplay.log', default=False, help='Auto play game and output the game results to a log file')
+parser.add_argument('--suit-up', action='store_true', help='run game with "suit up" house rule')
 args = parser.parse_args()
 
-def play_round(player_1_hand, player_2_hand, player_1_played_cards, player_2_played_cards, player_1_discard, player_2_discard, deal=1):
+def play_round(player_1_hand, player_2_hand, player_1_played_cards, player_2_played_cards, player_1_discard, player_2_discard, deal=1, reversed=False):
     '''
     Single round of gameplay, wars are considered part of the same round, and are recursively called
     '''
     if (not args.auto) and not(args.output): input('Press Enter to play')
+
     for _ in range(0, deal):
         if not any([any(player_1_hand), any(player_1_discard), any(player_2_hand), any(player_2_discard)]):
             # Players have played all cards in one long series of wars, just compare on the last card or draw
-            return compare_cards(player_1_played_cards[-1], player_2_played_cards[-1])
+            # assume suit_up can't activate on this last hand
+            return compare_cards(player_1_played_cards[-1], player_2_played_cards[-1], suit_up_active=False)
 
         player_2_win = check_and_refill_hand(player_1_hand, player_1_discard)
         if player_2_win: return 2
-        player_1_played_cards.append(player_1_hand.pop())
+        player_1_played_cards.append(player_1_hand.pop(0 if reversed else -1))
 
         player_1_win = check_and_refill_hand(player_2_hand, player_2_discard)
         if player_1_win: return 1
-        player_2_played_cards.append(player_2_hand.pop())
+        player_2_played_cards.append(player_2_hand.pop(0 if reversed else -1))
 
-    comparison = compare_cards(player_1_played_cards[-1], player_2_played_cards[-1])
+    comparison = compare_cards(player_1_played_cards[-1], player_2_played_cards[-1], suit_up_active=(args.suit_up and deal != 4))  # check if deal is 4, if it is it's a regular war and you can't enter suit-up
 
-    logger.info(f"P1: H:{str(len(player_1_hand)).ljust(2)} | D:{str(len(player_1_discard)).ljust(2)} | {player_1_played_cards}{'*' if comparison == 1 else ' '}")#\nHand: {player_1_hand}\nDiscard: {player_1_discard}")
-    logger.info(f"P2: H:{str(len(player_2_hand)).ljust(2)} | D:{str(len(player_2_discard)).ljust(2)} | {player_2_played_cards}{'*' if comparison == 2 else ' '}")#\nHand: {player_2_hand}\nDiscard: {player_2_discard}")
+    logger.info(f"P1: H:{str(len(player_1_hand)).ljust(2)} | D:{str(len(player_1_discard)).ljust(2)} | {player_1_played_cards}{'*' if comparison == 1 else ' '}")
+    logger.info(f"P2: H:{str(len(player_2_hand)).ljust(2)} | D:{str(len(player_2_discard)).ljust(2)} | {player_2_played_cards}{'*' if comparison == 2 else ' '}")
 
     if comparison == 1:
         player_1_discard += player_1_played_cards + player_2_played_cards
     elif comparison == 2:
         player_2_discard += player_2_played_cards + player_1_played_cards
-    else:
+    elif comparison == 0:
         logger.info("War!")
         return play_round(player_1_hand, player_2_hand, player_1_played_cards, player_2_played_cards, player_1_discard, player_2_discard, deal=4)
+    elif comparison == 3:
+        logger.info("Suit Up!")
+        return play_round(player_1_hand, player_2_hand, player_1_played_cards, player_2_played_cards, player_1_discard, player_2_discard, deal=2, reversed=True)
 
     return None  # no winner yet
 
