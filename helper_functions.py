@@ -20,6 +20,7 @@ def split_deck(deck):
 
 def map_card_to_numeric(card):
     '''Turn String values of cards into numeric representations for comparison'''
+    if card == 'Joker': return None
     suitless = card[:-1]
     if suitless == 'J': return 11
     elif suitless == 'Q': return 12
@@ -40,7 +41,7 @@ def compare_cards(card_1, card_2, suit_up_active=False):
     elif suit_up_active and (card_1[-1] == card_2[-1]): return 3
     elif numeric_1 > numeric_2: return 1
     elif numeric_1 < numeric_2: return 2
-    raise Exception(f"Comparison detected something unforeseen: {card_1} vs. {card_2}")
+    raise Exception(f"Comparison detected something unexpected: {card_1} vs. {card_2}")
 
 def check_and_refill_hand(hand, discard):
     '''
