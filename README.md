@@ -3,6 +3,10 @@
 ## Premise
 Implemented at the start of this assignement is the deterministic card game "war". [(See Game Rules here)](https://cardgames.io/war/)
 
+### General Information
+- Don't spend more than 4 hours on this assignment
+- Clone this repo and share it with us. **_Do not_** fork it and submit a PR (keep your work between us)
+
 There's also a pre-implemented house rule:
 ### House Rule 1 | Suit Up
 - If the same suit is played, they have a 'two card' war, but cards are played from the bottom of the hand
