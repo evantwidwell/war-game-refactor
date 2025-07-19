@@ -60,6 +60,9 @@ source war_env/bin/activate
 # Install requirements
 pip install -r requirements.txt
 
+# Set up pre-commit hooks (optional but recommended)
+python -m pre_commit install
+
 # Test new, class based functionality
 pytest test_war_game.py -v
 
@@ -161,63 +164,6 @@ _Only zero or one house rule should be implemented per game_
             - If it's still lower, the Queen player wins all 5 cards.
             - If it's higher, the King wins all 5 cards
 - Classic 'Wars' do not take effect until the Battle 'with advantage' is complete
-
-## Installation
-
-### Prerequisites
-- Python 3.9 or greater
-
-### Setup Instructions
-1. **Clone the repository:**
-   ```bash
-   git clone <repository-url>
-   cd tax_engineer_homework
-   ```
-
-2. **Create and activate a virtual environment:**
-   ```bash
-   # Create virtual environment
-   python -m venv war_env
-   
-   # Activate virtual environment
-   # On macOS/Linux:
-   source war_env/bin/activate
-   
-   # On Windows:
-   war_env\Scripts\activate
-   ```
-
-3. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Set up pre-commit hooks (optional but recommended):**
-   ```bash
-   pre-commit install
-   ```
-
-5. **Run the game:**
-   ```bash
-   # Basic game
-   python war_game.py --auto
-   
-   # With house rules
-   python war_game.py --auto --suit-up
-   python war_game.py --auto --battle-advantage
-   ```
-
-6. **Run tests:**
-   ```bash
-   python -m pytest test_war_game.py -v
-   python -m pytest test_legacy_war_game.py -v
-   ```
-
-### Deactivating the Virtual Environment
-When you're done, deactivate the virtual environment:
-```bash
-deactivate
-```
 
 ## Bonus: Still have time?
 
