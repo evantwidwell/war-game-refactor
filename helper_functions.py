@@ -130,9 +130,17 @@ class GameState:
         return deck
 
     def _split_deck(self, deck: List[Card]):
-        """Split deck in half for two players"""
-        player_1_hand = deck[: len(deck) // 2]
-        player_2_hand = deck[len(deck) // 2 :]
+        """Deal cards the way you would in an actual card game"""
+        player_1_hand = []
+        player_2_hand = []
+
+        # Alternate dealing cards to each player
+        for i, card in enumerate(deck):
+            if i % 2 == 0:
+                player_1_hand.append(card)
+            else:
+                player_2_hand.append(card)
+
         return player_1_hand, player_2_hand
 
     def _create_ordered_deck(self) -> List[Card]:
