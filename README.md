@@ -76,6 +76,7 @@ pytest test_legacy_war_game.py -v
 - ran `ruff` on the whole repo for readability
 - set up `pre-commit` hooks to automatically run ruff on all commits for consistent formatting
 - refactored the `play_round` function into smaller, more focused helper functions for better maintainability
+- the original code didn't really deal cards, it just split the deck in half. It now alternates the cards from the shuffled deck. Maybe slightly pedantic but seemed weird to me. 
 
 ## Premise
 Implemented at the start of this assignement is the deterministic card game "war". [(See Game Rules here)](https://cardgames.io/war/)
