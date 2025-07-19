@@ -1,5 +1,79 @@
 # Python Engineer Homework
 
+## Evan's Completed War Games Homework
+I re-implemented the war game using OOP to clean it up. The original game worked but was messy and hard to reason through. Breaking the various bits into established classes makes it easier to follow and keeps logic within the scope it should be encapsulated into. We now have a Card class, a Player Class, and a Gamestate Class to hold the current state of the game. This makes it much easier to debug and follow as the game continues, every needed value is contained in that game state class. Additionally, keeping everything in a class allows for new rules to be implemented more quickly, they just require changes in evaluation of the various methods that exist already. 
+
+Specific improvements:
+1. Replaced string-based card representation (`"5h"`) with structured `Card` objects to avoid constantly string parsing the cards
+2. Added comprehensive type hints and docstrings
+3. Added tests for original functionality and refactored functionality which covers the same cases to ensure consistency between legacy code and new, refactored code
+
+The second part of the assignment was adding in the "with Advantage" House Rule.
+I added this as a further case in the 
+
+
+You can simply run this just as you would have before by running `python war_game.py --auto --suit-up --battle-advantage`
+
+### Changes Made
+
+**Code Quality Improvements:**
+- Replaced string-based card representation (`"5h"`) with structured `Card` objects
+- Implemented proper encapsulation with clear method responsibilities
+- Added comprehensive type hints and docstrings
+- Separated concerns: game logic, player management, and card operations
+
+**Testing Infrastructure:**
+- **Comprehensive Test Suite**: 19 tests covering all major functionality using pytest
+- **Legacy Test Suite**: 35 equivalent tests for the original implementation to ensure behavioral consistency
+- **Test Coverage**: Card operations, player mechanics, game state management, integration testing, and house rule validation
+
+#### Part 2 - Battle "with Advantage" House Rule
+- King vs Queen special battle mechanics with multi-card resolution
+- Properly handles precedence over standard wars and suit-up rules
+- Added dedicated tests covering all battle scenarios and edge cases
+- Added `--battle-advantage` flag to enable the new house rule
+
+
+### Running the Game
+```bash
+# Basic game
+python war_game.py --auto
+
+# With Suit Up house rule
+python war_game.py --auto --suit-up
+
+# With Battle with Advantage house rule  
+python war_game.py --auto --battle-advantage
+
+# With both rules added in
+python war_game.py --auto --battle-advantage --suit-up
+```
+
+### Run tests. I prefer pytest so you'll need to either have it installed globally or you can create a virtualenv.
+```bash
+# Create virtual environment
+python -m venv war_env
+
+# Activate virtual environment
+source war_env/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+
+# Test new, class based functionality
+pytest test_war_game.py -v
+
+# Test legacy game functionality
+pytest test_legacy_war_game.py -v
+
+
+```
+
+## Miscellaneous other improvements
+- ran `ruff` on the whole repo for readability
+- set up `pre-commit` hooks to automatically run ruff on all commits for consistent formatting
+- refactored the `play_round` function into smaller, more focused helper functions for better maintainability
+
 ## Premise
 Implemented at the start of this assignement is the deterministic card game "war". [(See Game Rules here)](https://cardgames.io/war/)
 
@@ -89,7 +163,61 @@ _Only zero or one house rule should be implemented per game_
 - Classic 'Wars' do not take effect until the Battle 'with advantage' is complete
 
 ## Installation
-Clone the git-repo, and utilize python 3.9 or greater. The game is run in the terminal, and no non-standard python packages are used. (you can use any standard or non-standard packages you like, as long as you have proper installation instructions)
+
+### Prerequisites
+- Python 3.9 or greater
+
+### Setup Instructions
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd tax_engineer_homework
+   ```
+
+2. **Create and activate a virtual environment:**
+   ```bash
+   # Create virtual environment
+   python -m venv war_env
+   
+   # Activate virtual environment
+   # On macOS/Linux:
+   source war_env/bin/activate
+   
+   # On Windows:
+   war_env\Scripts\activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Set up pre-commit hooks (optional but recommended):**
+   ```bash
+   pre-commit install
+   ```
+
+5. **Run the game:**
+   ```bash
+   # Basic game
+   python war_game.py --auto
+   
+   # With house rules
+   python war_game.py --auto --suit-up
+   python war_game.py --auto --battle-advantage
+   ```
+
+6. **Run tests:**
+   ```bash
+   python -m pytest test_war_game.py -v
+   python -m pytest test_legacy_war_game.py -v
+   ```
+
+### Deactivating the Virtual Environment
+When you're done, deactivate the virtual environment:
+```bash
+deactivate
+```
 
 ## Bonus: Still have time?
 
